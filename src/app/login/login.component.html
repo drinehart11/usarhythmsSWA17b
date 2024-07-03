@@ -1,0 +1,30 @@
+<div class="splash-body" >
+  <section *ngIf="!(authService.isLoggedIn | async)" class="card">
+    <h4 class="card-header"><a _ngcontent-led-c3="" href="https://www.bu.edu/usarhythms/" target="_blank" class="navbar-brand"><svg _ngcontent-led-c3="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="bi bi-activity"><path _ngcontent-led-c3="" fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"></path></svg><b _ngcontent-led-c3="" style="color: red;">USA</b><i _ngcontent-led-c3="" style="color: blue;">rhythms</i></a><br />U19 Data Core - Sharing Portal</h4>
+    <div class="card-body">
+        <form #frmLogin="ngForm">
+            <div class="mb-3">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" [(ngModel)]="frm_Login_Model.username" required />
+<!--                <div *ngIf="submitted" class="invalid-feedback">-->
+<!--                    <div *ngIf="f.username.errors['required']">Username is required</div>-->
+<!--                </div>-->
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" [(ngModel)]="frm_Login_Model.password" required />
+<!--                <div *ngIf="submitted" class="invalid-feedback">-->
+<!--                    <div *ngIf="f.password.errors['required']">Password is required</div>-->
+<!--                </div>-->
+            </div>
+            <div>
+                <button [disabled]="!frmLogin.valid" (click)="login(frmLogin)" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                    Sign in
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+</div>

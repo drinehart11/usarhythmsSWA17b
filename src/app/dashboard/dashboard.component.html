@@ -1,0 +1,10 @@
+<div class="dashboard-container" [class.leftnavExpanded]="leftnavExpanded">
+  <app-header></app-header>
+  <div class="main-content">
+    <app-leftnav [isExpanded]="leftnavExpanded" (toggle)="onLeftNavToggle($event)"></app-leftnav>
+    <section class="content-area">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,40 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; // Use height instead of min-height
+  padding-top: 56px; // Adjust this to match your header's height
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden; // Prevent scrolling on this container
+}
+
+.content-area {
+  flex: 1;
+  padding: 24px;
+  margin-left: 60px; // Width of collapsed leftnav
+  transition: margin-left 0.3s ease;
+  overflow-y: auto; // Allow scrolling within the content area
+  height: calc(100vh - 56px); // Subtract header height
+  box-sizing: border-box; // Include padding in the height calculation
+}
+
+.leftnavExpanded {
+  .content-area {
+    margin-left: 250px; // Width of expanded leftnav
+  }
+}
+
+// Media query for smaller screens
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 0;
+    padding: 16px; // Slightly less padding on mobile
+  }
+
+  .leftnavExpanded .content-area {
+    margin-left: 0;
+  }
+}

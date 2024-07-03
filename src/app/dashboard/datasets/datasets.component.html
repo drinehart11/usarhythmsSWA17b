@@ -1,0 +1,16 @@
+<div class="datasets-container">
+  <h1>My Datasets</h1>
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    [rowData]="rowDataSubject$ | async"
+    [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    [rowHeight]="40"
+    [animateRows]="true"
+    (gridReady)="OnGridReady($event)"
+    (cellClicked)="onCellClicked($event)"
+    domLayout='autoHeight'
+  >
+  </ag-grid-angular>
+</div>

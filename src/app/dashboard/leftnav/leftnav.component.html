@@ -1,0 +1,28 @@
+<nav id="leftnav" class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+  <div class="header">
+    <h1 class="title">Menu</h1>
+    <div class="toggle" (click)="toggle_left_nav()">
+      <span class="chevron"></span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li class="nav-item">
+      <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="bi bi-house"></i>
+        <span class="link-text">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/dashboard/datasets']" routerLinkActive="active">
+        <i class="bi bi-clipboard2-data"></i>
+        <span class="link-text">My Datasets</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/dashboard/profile']" routerLinkActive="active">
+        <i class="bi bi-gear"></i>
+        <span class="link-text">Settings</span>
+      </a>
+    </li>
+  </ul>
+</nav>

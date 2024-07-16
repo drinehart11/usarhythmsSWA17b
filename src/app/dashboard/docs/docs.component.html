@@ -1,7 +1,18 @@
 <div class="docs-container content-container">
   <h1>Documentation</h1>
   <section class="docs-content">
-    <p>Programmers hate to write documentation. Period. But can't stop fuming when we see undocumented code. <i>When code is written, only God and the programmer understand it. Six months later, only God.</i></p>
+    <!-- <p>Programmers hate to write documentation. Period. But can't stop fuming when we see undocumented code. <i>When code is written, only God and the programmer understand it. Six months later, only God.</i></p> -->
+    <ol class="custom-ol">
+      <li>Create NWB file(s), replete with meta-data (actual raw data inclusion is optional)<br />Instructions for creation vary by experimental modality (See <a href="https://github.com/USArhythms/ingestion_scripts" target="_blank">READ ME</a>)</li>
+      <li>Validate NWB file(s)<br />Validation is performed on terminal with <a href="https://nwbinspector.readthedocs.io/en/dev/" target="_blank">NWB Inspector</a> &#64; <a href="https://www.dandiarchive.org/handbook/135_validation/" target="_blank">Validation</a></li>
+      <li>Upload NWB file(s) to usarhythms.ucsd.edu<br />
+      <ol class="custom-ol">
+        <li>Find user API key (See User profile settings on left nav bar); look for longer string after <b>API KEY:</b></li>
+        <li>Activate python virtual environment (Instructions coming soon)</li>
+        <li>Modified upload instructions from (https://www.dandiarchive.org/handbook/13_upload/) WIP</li>
+      </ol></li>
+    </ol>
+
     <!-- Add more documentation content here -->
   </section>
 </div>

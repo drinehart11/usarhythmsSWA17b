@@ -8,3 +8,7 @@
   }
 
 }
+.custom-ol {
+  list-style-type: decimal !important; /* This ensures numbers are shown */
+  margin-left: 20px; /* This ensures there is space for the numbers to be visible */
+}

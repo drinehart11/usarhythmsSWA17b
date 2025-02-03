@@ -19,8 +19,9 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   private routeSubscription: Subscription | null = null;
 
   colDefs: ColDef[] = [
-    { field: 'identifier', headerName: 'id', sortable: true, filter: true, flex: 1, minWidth: 125 },
-    { field: 'created', headerName: 'Created', sortable: true, filter: true, flex: 1, minWidth: 125 },
+    { field: 'identifier', headerName: 'id', sortable: true, filter: true, flex: 1, minWidth: 25 },
+    { field: 'draft_version.name', headerName: 'Dataset Name', sortable: true, filter: true, flex: 1, minWidth: 150 },
+    { field: 'created', headerName: 'Created', sortable: true, filter: true, flex: 1, minWidth: 100 },
     { field: 'contact_person', headerName: 'Owner', sortable: true, filter: true, flex: 1, minWidth: 150 }
   ];
 
@@ -28,6 +29,11 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     sortable: true,
     filter: true,
     resizable: true
+  };
+
+  public gridOptions = {
+    pagination: true,
+    paginationPageSize: 12,
   };
 
   constructor(
@@ -44,7 +50,6 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     this.loadDatasets();
     this.routeSubscription = this.route.queryParams.subscribe(params => {
       this.leftnavExpanded = params['leftnavExpanded'] === 'true';
-      this.resizeGrid();
     });
   }
 
@@ -72,7 +77,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       next: (data: any) => {
         let processedData = [];
         if (Array.isArray(data)) {
-          processedData = data.map((item: any) => { // Explicitly type 'item' as 'any'
+          processedData = data.map((item: any) => {
             if (item.created) {
               item.created = removeTimezoneInfo(item.created);
             }
@@ -81,7 +86,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
           this.rowDataSubject$.next(processedData);
           console.log('SUCCESS: DATA RECEIVED FROM API1');
         } else if (data.results && Array.isArray(data.results)) {
-          processedData = data.results.map((item: any) => { // Explicitly type 'item' as 'any'
+          processedData = data.results.map((item: any) => {
             if (item.created) {
               item.created = removeTimezoneInfo(item.created);
             }
@@ -102,10 +107,10 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   OnGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    this.resizeGrid();
+    this.gridApi.paginationSetPageSize(12);
+    this.gridApi.sizeColumnsToFit();
   }
 
   onCellClicked(event: CellClickedEvent) {

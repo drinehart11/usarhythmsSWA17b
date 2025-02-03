@@ -11,7 +11,7 @@
     1. Install node.js (Note: Requires Angular v. 14)
     2. Clone repository
     3. Compile typescript into SWA
-    4. Start local version: ng run serve
+    4. Start local version: ng serve
 
 ## Backend notes:
 

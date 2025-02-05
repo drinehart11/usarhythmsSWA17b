@@ -1,5 +1,8 @@
 .datasets-container {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 h1 {
@@ -9,8 +12,11 @@ h1 {
 }
 
 ag-grid-angular {
+  flex: 1;
   width: 100%;
-  height: calc(100vh - 240px); // Adjust based on your layout
+  height: calc(100vh - 80px); // Adjust 80px to the combined height of your top nav bar and any other elements
+  box-sizing: border-box;
+  overflow: auto;
 }
 
 @media (max-width: 768px) {
@@ -19,6 +25,6 @@ ag-grid-angular {
   }
 
   ag-grid-angular {
-    height: calc(100vh - 200px); // Adjust for mobile
+    height: calc(100vh - 80px); // Adjust for mobile
   }
 }

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-datasets',
@@ -17,12 +18,14 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   rowDataSubject$ = new BehaviorSubject<any[]>([]);
   private gridApi: GridApi | null = null;
   private routeSubscription: Subscription | null = null;
+  pageSizeOptions: number[] = [];
+
 
   colDefs: ColDef[] = [
     { field: 'identifier', headerName: 'id', sortable: true, filter: true, flex: 1, minWidth: 25 },
     { field: 'draft_version.name', headerName: 'Dataset Name', sortable: true, filter: true, flex: 1, minWidth: 150 },
     { field: 'created', headerName: 'Created', sortable: true, filter: true, flex: 1, minWidth: 100 },
-    { field: 'contact_person', headerName: 'Owner', sortable: true, filter: true, flex: 1, minWidth: 150 }
+    { field: 'contact_person', headerName: 'Owner/Contributor', sortable: true, filter: true, flex: 1, minWidth: 150 }
   ];
 
   public defaultColDef: ColDef = {
@@ -31,9 +34,14 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     resizable: true
   };
 
-  public gridOptions = {
+  public gridOptions: GridOptions = {
+    columnDefs: this.colDefs,
+    defaultColDef: this.defaultColDef,
     pagination: true,
     paginationPageSize: 12,
+    paginationPageSizeSelector: [6, 12, 20, 25],
+    domLayout: 'autoHeight',
+    rowData: null, // This will be bound to rowDataSubject$ in the template
   };
 
   constructor(
@@ -109,8 +117,15 @@ export class DatasetsComponent implements OnInit, OnDestroy {
   }
   OnGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    this.gridApi.paginationSetPageSize(12);
+    this.gridApi.updateGridOptions({ paginationPageSize: this.gridOptions.paginationPageSize });
     this.gridApi.sizeColumnsToFit();
+  }
+  onPageSizeChanged(newPageSize: number): void {
+    this.agGrid.api.updateGridOptions({ paginationPageSize: newPageSize });
+
+    setTimeout(() => {
+      this.agGrid.api.sizeColumnsToFit();
+    }, 0);
   }
 
   onCellClicked(event: CellClickedEvent) {
